@@ -1,0 +1,6 @@
+[default]
+aws_access_key_id = {{ database_backup_s3_config.access_key }}
+aws_secret_access_key = {{ database_backup_s3_config.secret }}
+host = s3.{{ database_backup_s3_config.region }}.amazonaws.com
+s3 =
+    signature_version = s3v4

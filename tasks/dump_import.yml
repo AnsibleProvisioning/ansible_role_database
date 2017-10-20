@@ -1,0 +1,11 @@
+---
+# Import an dumps given
+- name: Database | Import dump
+  mysql_db:
+      name: "{{ item.database_name }}"
+      state: import
+      login_user: root
+      login_password: "{{ database_root_password }}"
+      target: "{{ item.dump_file }}"
+  with_items: "{{ database_dumps }}"
+  when: database_dump_use == "yes"

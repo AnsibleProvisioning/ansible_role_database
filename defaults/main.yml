@@ -1,0 +1,35 @@
+---
+# Installation
+database_install: false
+
+# Configs
+database_root_password: "123"
+database_type: "mariadb"
+database_host: 'localhost'
+database_port: 3306
+
+# Root users
+database_root:
+    - { name: "root", password: "123", host: "localhost" }
+
+# Databases
+databases:
+    - { name: "db_one", collation: utf8_general_ci, encoding: utf8, host: localhost  }
+    - { name: "db_two", collation: utf8_general_ci, encoding: utf8, host: localhost  }
+
+# Users
+database_users:
+    - { user: "db_one_user_one", password: "123", database: "db_one", host: localhost }
+    - { user: "db_one_user_two", password: "123", database: "db_two", host: localhost }
+
+# Import from a dump
+database_dump_use: "no"
+database_dumps:
+    - { database_name: "db_example", dump_file: "" }
+
+# MariaDB
+database_mariadb_version: 10.1
+database_mariadb_apt_key: "0xF1656F24C74CD1D8" # Key for Ubuntu Xenial 16.04
+
+# MySQL
+database_mysql_version: 5.7

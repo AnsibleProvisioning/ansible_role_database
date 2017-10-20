@@ -1,0 +1,9 @@
+---
+- become: yes
+  apt:
+      pkg: "{{ item }}"
+      state: latest
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb

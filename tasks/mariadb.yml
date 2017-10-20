@@ -1,0 +1,30 @@
+---
+- name: Database | MariaDB Repository List
+  template:
+      src: mariadb.list.j2
+      dest: /etc/apt/sources.list.d/mariadb.list
+      owner: root
+      group: root
+      mode: 0644
+  register: mariadb_list
+
+- name: Database | MariaDB Repository Key
+  apt_key:
+      url: "http://keyserver.ubuntu.com/pks/lookup?op=get&search={{ database_mariadb_apt_key }}"
+      state: present
+  register: mariadb_key
+
+- name: Database | Update apt 
+  apt:
+      update_cache: yes
+  when: mariadb_list.changed == True or mariadb_key.changed == True
+
+- name: Database | Install MariaDB
+  become: yes
+  apt:
+      pkg: "{{ item }}"
+      state: latest
+  with_items:
+    - mariadb-server
+    - mariadb-client
+    - python-mysqldb

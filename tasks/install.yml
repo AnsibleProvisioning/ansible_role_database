@@ -1,0 +1,15 @@
+---
+- name: Database | Install MariaDB
+  include: mariadb.yml
+  when: database_type == "mariadb"
+
+- name: Database | Install MySQL
+  include: mysql.yml
+  when: database_type == "mysql"
+  
+- include: common.yml
+  when: database_type == "mariadb" or database_type == "mysql"
+
+- include: dump_import.yml
+  when: database_dump_use == "yes"
+

@@ -1,0 +1,3 @@
+---
+- include: install.yml
+  when: database_install == true
