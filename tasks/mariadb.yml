@@ -14,7 +14,7 @@
       state: present
   register: mariadb_key
 
-- name: Database | Update apt 
+- name: Database | Update apt
   apt:
       update_cache: yes
   when: mariadb_list.changed == True or mariadb_key.changed == True
@@ -22,9 +22,8 @@
 - name: Database | Install MariaDB
   become: yes
   apt:
-      pkg: "{{ item }}"
-      state: latest
-  with_items:
-    - mariadb-server
-    - mariadb-client
-    - python-mysqldb
+    state: latest
+    pkg:
+      - mariadb-server
+      - mariadb-client
+      - python-mysqldb
